@@ -5,8 +5,7 @@ const isNumeric = require('../utils/validation');
 
 // Retorna uma lista de recomendação de amigos baseado em amigos de amigos
 exports.getRecommendations = function (req, res) {
-    try {
-        const cpf = req.params.cpf;
+        const {cpf} = req.params;
         const person = personData.find(person => person.cpf === cpf);
 
         // Verifica se o CPF passado não contém 11 dígitos numéricos
@@ -44,8 +43,4 @@ exports.getRecommendations = function (req, res) {
         // Ordena os amigos recomendados de acordo com quantos relacionamentos em comum o usuário tem
         const sortedFriends = Object.keys(friendCounts).sort((a, b) => friendCounts[b] - friendCounts[a]).filter(friend => friend !== cpf);
         return res.status(200).json(sortedFriends);
-
-    } catch (err) {
-        return console.log(err);
-    }
 };

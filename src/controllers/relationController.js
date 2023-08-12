@@ -4,9 +4,7 @@ const relationData = require('../data/mockData').relationship_tb;
 
 // Cria um relacionamento entre dois usuários cadastrados
 exports.postRelation = function (req, res) {
-    try {
-        const cpf1 = req.body.cpf1;
-        const cpf2 = req.body.cpf2;
+        const { cpf1, cpf2 } = req.body;
         const person1 = personData.find(person => person.cpf === cpf1);
         const person2 = personData.find(person => person.cpf === cpf2);
 
@@ -24,8 +22,4 @@ exports.postRelation = function (req, res) {
         } else {
             return res.status(400).json({ message: "O relacionamento já existe." });
         }
-
-    } catch (err) {
-        return console.log(err);
-    }
 };

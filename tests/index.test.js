@@ -20,12 +20,12 @@ describe('Person API', ()=> {
     // Teste para o cadastro de pessoas
     describe('Cadastro de person', () => {
         test('Se o CPF conter 11 dígitos numéricos e não estiver cadastrado retorna 200', async () => {
-            const response = await request(app).post('/person').send({ "cpf": `${12346578000}`, "name": "Livia" });
+            const response = await request(app).post('/person').send({ "cpf": "12346578000", "name": "Livia" });
             expect(response.status).toBe(200);
         });
     
         test('Se o CPF for diferente de 11 dígitos retorna 400', async () => {
-            const response = await request(app).post('/person').send({ "cpf": `${1234657890}`, "name": "Livia" });
+            const response = await request(app).post('/person').send({ "cpf": "1234657890", "name": "Livia" });
             expect(response.status).toBe(400);
         });
     
@@ -35,7 +35,7 @@ describe('Person API', ()=> {
         });
     
         test('Se o CPF já estiver cadastrado retorna 400', async () => {
-            const response = await request(app).post('/person').send({ "cpf": `${12345678900}`, "name": "Rafaela" });
+            const response = await request(app).post('/person').send({ "cpf": "12345678900", "name": "Rafaela" });
             expect(response.status).toBe(400);
         });
     });
